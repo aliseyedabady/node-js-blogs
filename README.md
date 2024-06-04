@@ -1,4 +1,4 @@
-# My Node TypeScript Project
+# Node Js Blogs
 
 This is a Node.js project built with TypeScript.
 
