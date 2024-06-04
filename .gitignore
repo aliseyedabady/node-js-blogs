@@ -1,0 +1,50 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# TypeScript compiled output
+dist/
+build/
+
+# Optional npm cache directory
+.npm
+
+# IDE/Editor specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# MacOS specific files
+.DS_Store
+
+# Temporary files
+tmp/
+temp/
+
+# Coverage directory used by tools like jest
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Debug output
+*.log
+
+# Production build directory
+out/
+
+# Ignore private key files
+*.pem
+*.pfx
