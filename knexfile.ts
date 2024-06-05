@@ -4,7 +4,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 const config: { [key: string]: Knex.Config } = {
   development: {
-    client: "mysql2",
+    client: "mysql",
     connection: {
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
@@ -12,11 +12,7 @@ const config: { [key: string]: Knex.Config } = {
       database: process.env.DB_NAME,
     },
     migrations: {
-      tableName: "knex_migrations",
       directory: "./src/migrations",
-    },
-    seeds: {
-      directory: "./src/seeds",
     },
   },
 };

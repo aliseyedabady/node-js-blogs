@@ -1,5 +1,5 @@
 import { checkSchema } from "express-validator";
-import knex from "knex";
+import knex from "../lib/db";
 
 export const AdminSignupValidation = checkSchema({
   username: {

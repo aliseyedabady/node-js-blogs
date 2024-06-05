@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express";
 import jwt from "jsonwebtoken";
 import { RequestUser } from "./type";
+import { jwtSecret } from "../lib/constants";
 
 export const AdminMiddleware = (
   request: RequestUser,
@@ -11,7 +12,7 @@ export const AdminMiddleware = (
   if (token) {
     jwt.verify(
       token.split(" ")[1],
-      process.env.JWT_SECRET || "secretKey",
+      jwtSecret,
       (error: any, decoded: any): void => {
         if (error) {
           response.sendStatus(401);

@@ -18,7 +18,7 @@ class ResponseHandler {
   error(
     res: Response,
     error: any,
-    message = "Error",
+    message = "Server Error",
     statusCode = 500
   ): Response {
     return res.status(statusCode).json({
