@@ -1,8 +1,7 @@
 import { Response } from "express";
-import IResponseHandler from "./responseType";
 import { Result, ValidationError } from "express-validator";
 
-class ResponseHandler implements IResponseHandler {
+class ResponseHandler {
   success(
     res: Response,
     data: any,
