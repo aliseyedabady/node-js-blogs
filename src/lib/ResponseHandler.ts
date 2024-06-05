@@ -1,0 +1,66 @@
+import { Response } from "express";
+import IResponseHandler from "./responseType";
+import { Result, ValidationError } from "express-validator";
+
+class ResponseHandler implements IResponseHandler {
+  success(
+    res: Response,
+    data: any,
+    message = "Success",
+    statusCode = 200
+  ): Response {
+    return res.status(statusCode).json({
+      status: "success",
+      message,
+      data,
+    });
+  }
+
+  error(
+    res: Response,
+    error: any,
+    message = "Error",
+    statusCode = 500
+  ): Response {
+    return res.status(statusCode).json({
+      status: "error",
+      message,
+      error,
+    });
+  }
+
+  notFound(
+    res: Response,
+    message = "Resource not found",
+    statusCode = 404
+  ): Response {
+    return res.status(statusCode).json({
+      status: "error",
+      message,
+    });
+  }
+
+  badRequest(
+    res: Response,
+    message = "Bad Request",
+    statusCode = 400
+  ): Response {
+    return res.status(statusCode).json({
+      status: "error",
+      message,
+    });
+  }
+
+  validationError(
+    res: Response,
+    message: Result<ValidationError>,
+    statusCode = 422
+  ) {
+    return res.status(statusCode).json({
+      status: "error",
+      message: message.array(),
+    });
+  }
+}
+
+export default new ResponseHandler();
