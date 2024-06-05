@@ -60,6 +60,9 @@ class ResponseHandler {
       message: message.array(),
     });
   }
+  unauthorized(res: Response, statusCode = 401) {
+    return res.status(statusCode);
+  }
 }
 
 export default new ResponseHandler();
