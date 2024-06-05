@@ -16,13 +16,15 @@ class AdminAuth {
       return ResponseHandler.validationError(res, errors);
     }
     try {
-      const { username, password } = req.body;
+      const { username, password, name, email } = req.body;
 
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await User.query().insert({
         username,
         password: hashedPassword,
         role: "admin",
+        name,
+        email,
       });
       const token = jwt.sign({ id: user.id }, jwtSecret, {
         expiresIn: jwtExpiresIn,

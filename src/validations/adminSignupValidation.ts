@@ -27,4 +27,17 @@ export const AdminSignupValidation = checkSchema({
       errorMessage: "نام کاربری حداقل ۴ کاراکتر و حداکثر ۳۶ کاراکتر می باشد",
     },
   },
+  name: {
+    notEmpty: {
+      errorMessage: "نام اجباری است",
+    },
+  },
+  email: {
+    notEmpty: {
+      errorMessage: "ایمیل اجباری است",
+    },
+    isEmail: {
+      errorMessage: "ایمیل صحیح نیست",
+    },
+  },
 });
