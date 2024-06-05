@@ -6,10 +6,11 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-console.log(process.env);
+
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(api);
 

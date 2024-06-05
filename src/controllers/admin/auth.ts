@@ -6,12 +6,12 @@ class AdminAuth {
   async login(req: Request, res: Response) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(errors.array());
       return ResponseHandler.validationError(res, errors);
     }
 
     const { username, password } = req.body;
   }
+  async signUp(req: Request, res: Response) {}
 }
 
 export default new AdminAuth();
