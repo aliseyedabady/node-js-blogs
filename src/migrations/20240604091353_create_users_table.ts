@@ -5,6 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments("id").primary();
     table.string("name").notNullable();
     table.string("email").notNullable().unique();
+    table.enum("role", ["admin", "user"]);
   });
 }
 

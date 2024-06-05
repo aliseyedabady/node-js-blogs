@@ -11,7 +11,7 @@ export const AdminMiddleware = (
   if (token) {
     jwt.verify(
       token.split(" ")[1],
-      "secretKey",
+      process.env.JWT_SECRET || "secretKey",
       (error: any, decoded: any): void => {
         if (error) {
           response.sendStatus(401);
