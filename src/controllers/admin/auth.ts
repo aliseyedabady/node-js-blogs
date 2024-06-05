@@ -5,9 +5,11 @@ import bcrypt from "bcrypt";
 import knex from "../../lib/db";
 import jwt from "jsonwebtoken";
 import { jwtExpiresIn, jwtSecret } from "../../lib/constants";
+import { User } from "../../models";
 
 class AdminAuth {
   async login(req: Request, res: Response) {}
+
   async signUp(req: Request, res: Response) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -17,12 +19,12 @@ class AdminAuth {
       const { username, password } = req.body;
 
       const hashedPassword = await bcrypt.hash(password, 10);
-      const [userId] = await knex("users").insert({
+      const user = await User.query().insert({
         username,
         password: hashedPassword,
         role: "admin",
       });
-      const token = jwt.sign({ id: userId }, jwtSecret, {
+      const token = jwt.sign({ id: user.id }, jwtSecret, {
         expiresIn: jwtExpiresIn,
       });
 
