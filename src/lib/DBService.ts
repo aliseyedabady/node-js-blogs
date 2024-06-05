@@ -1,4 +1,3 @@
-import knex from "knex";
 import { Model } from "objection";
 
 class DBService {

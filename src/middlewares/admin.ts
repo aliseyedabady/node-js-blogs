@@ -9,6 +9,7 @@ export const AdminMiddleware = (
   next: NextFunction
 ) => {
   const token = request.headers.authorization;
+
   if (token) {
     jwt.verify(
       token.split(" ")[1],
@@ -17,8 +18,8 @@ export const AdminMiddleware = (
         if (error) {
           response.sendStatus(401);
         } else {
-          if (decoded && decoded.user && decoded.user.role === "admin") {
-            request.user = decoded.user;
+          if (decoded && decoded.role === "admin") {
+            request.user = decoded;
             next();
           } else {
             response.sendStatus(401);

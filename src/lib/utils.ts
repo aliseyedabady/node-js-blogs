@@ -6,11 +6,16 @@ import {
   jwtSecret,
   saltRounds,
 } from "./constants";
+import { User } from "../models";
 
-export const generateAccessToken = (user: any) => {
-  return jwt.sign({ id: user.id, username: user.username }, jwtSecret, {
-    expiresIn: jwtExpiresIn,
-  });
+export const generateAccessToken = (user: User) => {
+  return jwt.sign(
+    { id: user.id, username: user.username, role: user.role },
+    jwtSecret,
+    {
+      expiresIn: jwtExpiresIn,
+    }
+  );
 };
 
 export const generateRefreshToken = (user: any) => {
