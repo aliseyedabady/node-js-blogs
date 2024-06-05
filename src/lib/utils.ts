@@ -7,6 +7,7 @@ import {
   saltRounds,
 } from "./constants";
 import { User } from "../models";
+import { Model } from "objection";
 
 export const generateAccessToken = (user: User) => {
   return jwt.sign(
@@ -26,4 +27,23 @@ export const generateRefreshToken = (user: any) => {
 
 export const hashPassword = async (password: string) => {
   return await bcrypt.hash(password, saltRounds);
+};
+
+type TCheckUnique = {
+  value: string;
+  model: typeof Model;
+  message: string;
+  key: string;
+};
+
+export const checkUnique = async ({
+  value,
+  model,
+  key,
+  message,
+}: TCheckUnique) => {
+  const result = await model.query().findOne({ [key]: value });
+  if (result) {
+    return Promise.reject(message);
+  }
 };

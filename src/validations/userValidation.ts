@@ -1,5 +1,6 @@
 import { checkSchema } from "express-validator";
-import knex from "../lib/db";
+import { User } from "../models";
+import { checkUnique } from "../lib/utils";
 
 export const UserValidator = checkSchema({
   username: {
@@ -8,10 +9,12 @@ export const UserValidator = checkSchema({
     },
     custom: {
       options: async value => {
-        const user = await knex("users").where({ username: value }).first();
-        if (user) {
-          return Promise.reject("نام کاربری تکراری است");
-        }
+        await checkUnique({
+          value,
+          model: User,
+          key: "username",
+          message: "نام کاربری تکراری است",
+        });
       },
     },
   },
@@ -38,6 +41,16 @@ export const UserValidator = checkSchema({
     },
     isEmail: {
       errorMessage: "ایمیل صحیح نیست",
+    },
+    custom: {
+      options: async value => {
+        await checkUnique({
+          value,
+          model: User,
+          key: "email",
+          message: "ایمیل تکراری است",
+        });
+      },
     },
   },
 });

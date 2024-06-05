@@ -13,7 +13,6 @@ class UserController {
     }
     try {
       const { username, password, name, email } = req.body;
-
       const hashedPassword = await hashPassword(password);
       const user = await DBService.insertData(User, {
         username,
@@ -21,6 +20,7 @@ class UserController {
         name,
         email,
       });
+      delete user.password;
       ResponseHandler.success(res, user);
     } catch (error) {
       console.log(error);
