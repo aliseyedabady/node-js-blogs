@@ -17,6 +17,6 @@ if (process.env.MODE === "development") {
 }
 api.use("/admin", AdminMiddleware);
 api.use("/admin/refresh", AuthController.refresh);
-api.post("/admin/categories", UserValidator, UserController.store);
+api.post("/admin/users", UserValidator, UserController.store);
 
 export { api };
