@@ -1,3 +1,10 @@
 {
-  "Username required": "Username is required!"
+  "Username required": "Username is required!",
+  "Username already in use": "Username already in use!",
+  "Password required": "Password is required!",
+  "Password length": "Password must be between 6 to 32 character",
+  "Email required": "Email is required!",
+  "Email invalid": "Email is invalid!",
+  "Email already in use": "Email already in use!",
+  "Name required": "Name is required!"
 }

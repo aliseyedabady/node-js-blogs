@@ -1,5 +1,5 @@
 import { adminLoginValidation } from "./adminLoginValidation";
-import { UserValidator } from "./userValidation";
-import { AdminSignupValidation } from "./adminSignupValidation";
+import { userValidation } from "./userValidation";
+import { adminSignupValidation } from "./adminSignupValidation";
 
-export { UserValidator, adminLoginValidation, AdminSignupValidation };
+export { userValidation, adminLoginValidation, adminSignupValidation };

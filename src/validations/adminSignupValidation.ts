@@ -1,56 +1,35 @@
-import { checkSchema } from "express-validator";
+import { body } from "express-validator";
 import { checkUnique } from "../lib/utils";
 import { User } from "../models";
 
-export const AdminSignupValidation = checkSchema({
-  username: {
-    notEmpty: {
-      errorMessage: "نام کاربری اجباری است",
-    },
-    custom: {
-      options: async value => {
-        await checkUnique({
-          value,
-          model: User,
-          key: "username",
-          message: "نام کاربری تکراری است",
-        });
-      },
-    },
-  },
-  password: {
-    notEmpty: {
-      errorMessage: "رمز عبور اجباری است",
-    },
-    isLength: {
-      options: {
-        min: 4,
-        max: 36,
-      },
-      errorMessage: "نام کاربری حداقل ۴ کاراکتر و حداکثر ۳۶ کاراکتر می باشد",
-    },
-  },
-  name: {
-    notEmpty: {
-      errorMessage: "نام اجباری است",
-    },
-  },
-  email: {
-    notEmpty: {
-      errorMessage: "ایمیل اجباری است",
-    },
-    isEmail: {
-      errorMessage: "ایمیل صحیح نیست",
-    },
-    custom: {
-      options: async value => {
-        await checkUnique({
-          value,
-          model: User,
-          key: "email",
-          message: "ایمیل تکراری است",
-        });
-      },
-    },
-  },
-});
+export const adminSignupValidation = [
+  body("username")
+    .isString()
+    .withMessage((_, { req }) => req.__("Username required"))
+    .custom(async (value, { req }) => {
+      await checkUnique({
+        value,
+        model: User,
+        key: "username",
+        message: req.__("Username already in use"),
+      });
+    }),
+  body("password")
+    .isString()
+    .withMessage((_, { req }) => req.__("Password required"))
+    .isLength({ min: 6, max: 32 })
+    .withMessage((_, { req }) => req.__("Password length")),
+  body("email")
+    .isString()
+    .withMessage((_, { req }) => req.__("Email required"))
+    .isEmail()
+    .withMessage((_, { req }) => req.__("Email invalid"))
+    .custom(async (value, { req }) => {
+      await checkUnique({
+        value,
+        model: User,
+        key: "email",
+        message: req.__("Email already in use"),
+      });
+    }),
+];

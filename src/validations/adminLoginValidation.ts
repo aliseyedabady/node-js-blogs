@@ -3,22 +3,10 @@ import { body } from "express-validator";
 export const adminLoginValidation = [
   body("username")
     .isString()
-    .withMessage((value, { req }) => req.__("Username required")),
+    .withMessage((_, { req }) => req.__("Username required")),
+  body("password")
+    .isString()
+    .withMessage((_, { req }) => req.__("Password required"))
+    .isLength({ min: 6, max: 32 })
+    .withMessage((_, { req }) => req.__("Password length")),
 ];
-// username: {
-//   notEmpty: {
-//     errorMessage: "نام کاربری اجباری است",
-//   },
-// },
-// password: {
-//   notEmpty: {
-//     errorMessage: "رمز عبور اجباری است",
-//   },
-//   isLength: {
-//     options: {
-//       min: 4,
-//       max: 36,
-//     },
-//     errorMessage: "نام کاربری حداقل ۴ کاراکتر و حداکثر ۳۶ کاراکتر می باشد",
-//   },
-// },
