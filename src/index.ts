@@ -3,12 +3,24 @@ import bodyParser from "body-parser";
 import { api } from "./routes/api";
 import * as dotenv from "dotenv";
 import knex from "./lib/db";
+import i18n from "i18n";
 
 dotenv.config();
 
 const app = express();
 
 const port = process.env.PORT;
+
+i18n.configure({
+  locales: ["en", "fa"],
+  directory: __dirname + "/translations",
+  defaultLocale: "en",
+  queryParameter: "lang",
+  header: "accept-language",
+  autoReload: true,
+  updateFiles: false,
+});
+app.use(i18n.init);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

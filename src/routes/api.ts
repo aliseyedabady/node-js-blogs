@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { AdminMiddleware } from "../middlewares";
 import {
-  AdminLoginValidation,
+  adminLoginValidation,
   AdminSignupValidation,
   UserValidator,
 } from "../validations";
@@ -11,7 +11,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const api = Router();
-api.use("/admin/login", AdminLoginValidation, AuthController.login);
+api.use("/admin/login", adminLoginValidation, AuthController.login);
 if (process.env.MODE === "development") {
   api.use("/admin/signup", AdminSignupValidation, AuthController.signUp);
 }

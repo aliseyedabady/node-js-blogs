@@ -1,0 +1,6 @@
+{
+  "Name must be a string": "El nombre debe ser una cadena",
+  "Email must be valid": "El correo electrónico debe ser válido",
+  "Age must be a positive integer": "La edad debe ser un número entero positivo",
+  "Data received successfully": "Datos recibidos con éxito"
+}

@@ -23,9 +23,9 @@ class AdminAuth {
       if (user && (await bcrypt.compare(password, user.password))) {
         const accessToken = generateAccessToken(user);
         const refreshToken = generateRefreshToken(user);
-        ResponseHandler.success(res, { accessToken, refreshToken });
+        return ResponseHandler.success(res, { accessToken, refreshToken });
       }
-      ResponseHandler.notFound(res, "نام کاربری یا رمز عبور اشتباه است");
+      return ResponseHandler.notFound(res, "نام کاربری یا رمز عبور اشتباه است");
     } catch (error) {
       console.log(error);
       ResponseHandler.error(res, error);

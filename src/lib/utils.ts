@@ -49,26 +49,3 @@ export const checkUnique = async ({
     return Promise.reject(message);
   }
 };
-
-type TTranslations = {
-  [key: string]: any;
-};
-
-export const translations: TTranslations = {
-  en: require("../translations/en.json"),
-  fa: require("../translations/fa.json"),
-};
-
-type TTranslateMessage = {
-  req: Request;
-  key: string;
-};
-
-export const translateMessage = ({ key, req }: TTranslateMessage): string => {
-  try {
-    const language: string = req.header("accept-language") || "en";
-    return translations[language][key] || translateErrorMessage;
-  } catch (error) {
-    return translateErrorMessage;
-  }
-};
