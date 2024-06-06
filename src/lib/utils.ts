@@ -1,3 +1,4 @@
+import { Request } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {
@@ -5,6 +6,7 @@ import {
   jwtRefreshExpiresIn,
   jwtSecret,
   saltRounds,
+  translateErrorMessage,
 } from "./constants";
 import { User } from "../models";
 import { Model } from "objection";
@@ -45,5 +47,28 @@ export const checkUnique = async ({
   const result = await model.query().findOne({ [key]: value });
   if (result) {
     return Promise.reject(message);
+  }
+};
+
+type TTranslations = {
+  [key: string]: any;
+};
+
+export const translations: TTranslations = {
+  en: require("../translations/en.json"),
+  fa: require("../translations/fa.json"),
+};
+
+type TTranslateMessage = {
+  req: Request;
+  key: string;
+};
+
+export const translateMessage = ({ key, req }: TTranslateMessage): string => {
+  try {
+    const language: string = req.header("accept-language") || "en";
+    return translations[language][key] || translateErrorMessage;
+  } catch (error) {
+    return translateErrorMessage;
   }
 };
