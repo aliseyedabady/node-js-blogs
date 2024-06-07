@@ -6,5 +6,6 @@
   "Email required": "Email is required!",
   "Email invalid": "Email is invalid!",
   "Email already in use": "Email already in use!",
-  "Name required": "Name is required!"
+  "Name required": "Name is required!",
+  "Invalid username or password": "Username or password is wrong!"
 }

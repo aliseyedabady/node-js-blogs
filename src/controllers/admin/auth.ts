@@ -25,7 +25,10 @@ class AdminAuth {
         const refreshToken = generateRefreshToken(user);
         return ResponseHandler.success(res, { accessToken, refreshToken });
       }
-      return ResponseHandler.notFound(res, "نام کاربری یا رمز عبور اشتباه است");
+      return ResponseHandler.notFound(
+        res,
+        req.__("Invalid username or password")
+      );
     } catch (error) {
       console.log(error);
       ResponseHandler.error(res, error);

@@ -1,6 +1,11 @@
 {
   "Username required": "نام کاربری اجباری است!",
+  "Username already in use": "نام کاربری تکراری است!",
   "Password required": "رمز عبور اجباری است!",
   "Password length": "رمز عبور باید بین ۶ تا ۳۲ کارکتر باشد",
-  "Username already in use": "نام کاربری تکراری است!"
+  "Email required": "ایمیل اجباری است!",
+  "Email invalid": "ایمیل صحیح نمی باشد!",
+  "Email already in use": "ایمیل تکراری است!",
+  "Name required": "نام اجباری است!",
+  "Invalid username or password": "نام کاربری یا رمز عبور اشتباه است!"
 }

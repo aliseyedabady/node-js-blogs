@@ -14,7 +14,7 @@ class UserController {
     try {
       const { username, password, name, email } = req.body;
       const hashedPassword = await hashPassword(password);
-      const user = await DBService.insertData(User, {
+      const user = await DBService.insert(User, {
         username,
         password: hashedPassword,
         name,
@@ -22,6 +22,19 @@ class UserController {
       });
       delete user.password;
       ResponseHandler.success(res, user);
+    } catch (error) {
+      console.log(error);
+      ResponseHandler.error(res, error);
+    }
+  }
+  async get(req: Request, res: Response) {
+    try {
+      const users = await DBService.get({
+        model: User,
+        req,
+        filters: ["name"],
+      });
+      ResponseHandler.success(res, users);
     } catch (error) {
       console.log(error);
       ResponseHandler.error(res, error);
