@@ -7,5 +7,7 @@
   "Email invalid": "Email is invalid!",
   "Email already in use": "Email already in use!",
   "Name required": "Name is required!",
-  "Invalid username or password": "Username or password is wrong!"
+  "Invalid username or password": "Username or password is wrong!",
+  "Title required": "Title is required!",
+  "Title already in use": "Title already in use!"
 }

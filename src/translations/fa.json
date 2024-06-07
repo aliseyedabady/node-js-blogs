@@ -7,5 +7,7 @@
   "Email invalid": "ایمیل صحیح نمی باشد!",
   "Email already in use": "ایمیل تکراری است!",
   "Name required": "نام اجباری است!",
-  "Invalid username or password": "نام کاربری یا رمز عبور اشتباه است!"
+  "Invalid username or password": "نام کاربری یا رمز عبور اشتباه است!",
+  "Title required": "عنوان اجباری است!",
+  "Title already in use": "عنوان تکراری است!"
 }

@@ -1,30 +1,24 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import ResponseHandler from "../../lib/ResponseHandler";
-import { hashPassword } from "../../lib/utils";
-import { User } from "../../models";
 import DBService from "../../lib/DBService";
+import { Category } from "../../models";
 
-class UserController {
+class CategoryController {
   async store(req: Request, res: Response) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return ResponseHandler.validationError(res, errors);
     }
     try {
-      const { username, password, name, email } = req.body;
-      const hashedPassword = await hashPassword(password);
-      const user = await DBService.insert({
-        model: User,
+      const { title } = req.body;
+      const category = await DBService.insert({
+        model: Category,
         data: {
-          username,
-          password: hashedPassword,
-          name,
-          email,
+          title,
         },
       });
-      delete user.password;
-      ResponseHandler.success(res, user);
+      ResponseHandler.success(res, category);
     } catch (error) {
       console.log(error);
       ResponseHandler.error(res, error);
@@ -32,12 +26,12 @@ class UserController {
   }
   async get(req: Request, res: Response) {
     try {
-      const users = await DBService.get({
-        model: User,
+      const categories = await DBService.get({
+        model: Category,
         req,
-        filters: ["name"],
+        filters: ["title"],
       });
-      ResponseHandler.success(res, users);
+      ResponseHandler.success(res, categories);
     } catch (error) {
       console.log(error);
       ResponseHandler.error(res, error);
@@ -45,7 +39,10 @@ class UserController {
   }
   async find(req: Request, res: Response) {
     try {
-      const user = await DBService.getById({ model: User, id: req.params.id });
+      const user = await DBService.getById({
+        model: Category,
+        id: req.params.id,
+      });
       if (user) {
         ResponseHandler.success(res, user);
       } else {
@@ -58,13 +55,13 @@ class UserController {
   }
   async update(req: Request, res: Response) {
     try {
-      const user = await DBService.update({
-        model: User,
+      const category = await DBService.update({
+        model: Category,
         id: req.params.id,
         data: req.body,
       });
-      if (user) {
-        ResponseHandler.success(res, user);
+      if (category) {
+        ResponseHandler.success(res, category);
       } else {
         ResponseHandler.notFound(res);
       }
@@ -75,7 +72,10 @@ class UserController {
   }
   async remove(req: Request, res: Response) {
     try {
-      const user = await DBService.delete({ id: req.params.id, model: User });
+      const user = await DBService.delete({
+        id: req.params.id,
+        model: Category,
+      });
       if (user) {
         ResponseHandler.success(res);
       } else {
@@ -88,4 +88,4 @@ class UserController {
   }
 }
 
-export default new UserController();
+export default new CategoryController();

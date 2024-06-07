@@ -32,7 +32,9 @@ class DBService {
     }
     if (filters && filters.length > 0) {
       filters.forEach(key => {
-        query.where(key, "like", `${req.query[key]}`);
+        if (req.query[key]) {
+          query.where(key, "like", `${req.query[key]}`);
+        }
       });
     }
     return query;
