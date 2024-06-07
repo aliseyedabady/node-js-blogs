@@ -4,7 +4,7 @@ import { Result, ValidationError } from "express-validator";
 class ResponseHandler {
   success(
     res: Response,
-    data: any,
+    data = {},
     message = "Success",
     statusCode = 200
   ): Response {

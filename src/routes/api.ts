@@ -20,5 +20,7 @@ api.use("/admin/refresh", AuthController.refresh);
 api.post("/admin/users", userValidation, UserController.store);
 api.get("/admin/users", userValidation, UserController.get);
 api.get("/admin/users/:id", userValidation, UserController.find);
+api.put("/admin/users/:id", userValidation, UserController.update);
+api.delete("/admin/users/:id", userValidation, UserController.deleteUser);
 
 export { api };

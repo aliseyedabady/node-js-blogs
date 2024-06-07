@@ -56,6 +56,36 @@ class UserController {
       ResponseHandler.error(res, error);
     }
   }
+  async update(req: Request, res: Response) {
+    try {
+      const user = await DBService.update({
+        model: User,
+        id: req.params.id,
+        data: req.body,
+      });
+      if (user) {
+        ResponseHandler.success(res, user);
+      } else {
+        ResponseHandler.notFound(res);
+      }
+    } catch (error) {
+      console.log(error);
+      ResponseHandler.error(res, error);
+    }
+  }
+  async deleteUser(req: Request, res: Response) {
+    try {
+      const user = await DBService.delete({ id: req.params.id, model: User });
+      if (user) {
+        ResponseHandler.success(res);
+      } else {
+        ResponseHandler.notFound(res);
+      }
+    } catch (error) {
+      console.log(error);
+      ResponseHandler.error(res, error);
+    }
+  }
 }
 
 export default new UserController();

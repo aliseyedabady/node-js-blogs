@@ -40,6 +40,20 @@ class DBService {
   async getById({ model, id }: { model: typeof Model; id: string }) {
     return model.query().findById(id);
   }
+  async update({
+    model,
+    id,
+    data,
+  }: {
+    model: typeof Model;
+    id: string;
+    data: any;
+  }) {
+    return model.query().patchAndFetchById(id, data);
+  }
+  async delete({ model, id }: { model: typeof Model; id: string }) {
+    return model.query().deleteById(id);
+  }
 }
 
 export default new DBService();
