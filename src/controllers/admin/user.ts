@@ -14,11 +14,14 @@ class UserController {
     try {
       const { username, password, name, email } = req.body;
       const hashedPassword = await hashPassword(password);
-      const user = await DBService.insert(User, {
-        username,
-        password: hashedPassword,
-        name,
-        email,
+      const user = await DBService.insert({
+        model: User,
+        data: {
+          username,
+          password: hashedPassword,
+          name,
+          email,
+        },
       });
       delete user.password;
       ResponseHandler.success(res, user);
@@ -35,6 +38,19 @@ class UserController {
         filters: ["name"],
       });
       ResponseHandler.success(res, users);
+    } catch (error) {
+      console.log(error);
+      ResponseHandler.error(res, error);
+    }
+  }
+  async find(req: Request, res: Response) {
+    try {
+      const user = await DBService.getById({ model: User, id: req.params.id });
+      if (user) {
+        ResponseHandler.success(res, user);
+      } else {
+        ResponseHandler.notFound(res);
+      }
     } catch (error) {
       console.log(error);
       ResponseHandler.error(res, error);

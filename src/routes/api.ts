@@ -19,5 +19,6 @@ api.use("/admin", AdminMiddleware);
 api.use("/admin/refresh", AuthController.refresh);
 api.post("/admin/users", userValidation, UserController.store);
 api.get("/admin/users", userValidation, UserController.get);
+api.get("/admin/users/:id", userValidation, UserController.find);
 
 export { api };

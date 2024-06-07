@@ -2,7 +2,13 @@ import { Request } from "express";
 import { Model } from "objection";
 
 class DBService {
-  async insert(model: typeof Model, data: any): Promise<any> {
+  async insert({
+    model,
+    data,
+  }: {
+    model: typeof Model;
+    data: any;
+  }): Promise<any> {
     try {
       return await model.query().insert(data);
     } catch (error) {
@@ -30,6 +36,9 @@ class DBService {
       });
     }
     return query;
+  }
+  async getById({ model, id }: { model: typeof Model; id: string }) {
+    return model.query().findById(id);
   }
 }
 
