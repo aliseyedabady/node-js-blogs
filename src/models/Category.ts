@@ -1,4 +1,5 @@
 import { Model } from "objection";
+import Image from "./Image";
 
 class Category extends Model {
   static get tableName() {
@@ -11,6 +12,17 @@ class Category extends Model {
   title!: string;
   created_at!: string;
   updated_at!: string;
+
+  static relationMappings = {
+    image: {
+      relation: Model.BelongsToOneRelation,
+      modelClass: Image,
+      join: {
+        from: "categories.image_id",
+        to: "images.id",
+      },
+    },
+  };
 }
 
 export default Category;
