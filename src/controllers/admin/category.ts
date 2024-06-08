@@ -6,11 +6,13 @@ import { Category } from "../../models";
 
 class CategoryController {
   async store(req: Request, res: Response) {
+    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return ResponseHandler.validationError(res, errors);
     }
     try {
+      console.log(req.file);
       const { title } = req.body;
       const category = await DBService.insert({
         model: Category,

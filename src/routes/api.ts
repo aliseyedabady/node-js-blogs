@@ -12,6 +12,7 @@ import {
   UserController,
 } from "../controllers/admin";
 import * as dotenv from "dotenv";
+import upload from "../lib/upload";
 
 dotenv.config();
 
@@ -29,7 +30,12 @@ api.get("/admin/users/:id", UserController.find);
 api.put("/admin/users/:id", UserController.update);
 api.delete("/admin/users/:id", UserController.remove);
 
-api.post("/admin/categories", categoryValidation, CategoryController.store);
+api.post(
+  "/admin/categories",
+  upload.single("image"),
+  categoryValidation,
+  CategoryController.store
+);
 api.get("/admin/categories", CategoryController.get);
 api.get("/admin/categories/:id", CategoryController.find);
 api.put("/admin/categories/:id", CategoryController.update);

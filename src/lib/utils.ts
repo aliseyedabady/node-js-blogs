@@ -44,8 +44,10 @@ export const checkUnique = async ({
   key,
   message,
 }: TCheckUnique) => {
-  const result = await model.query().findOne({ [key]: value });
-  if (result) {
-    return Promise.reject(message);
+  if (value) {
+    const result = await model.query().findOne({ [key]: value });
+    if (result) {
+      return Promise.reject(message);
+    }
   }
 };

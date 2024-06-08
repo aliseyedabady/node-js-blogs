@@ -48,3 +48,5 @@ out/
 # Ignore private key files
 *.pem
 *.pfx
+
+uploads/
