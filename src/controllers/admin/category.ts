@@ -43,7 +43,7 @@ class CategoryController {
         model: Category,
         req,
         filters: ["title"],
-        withRelation: ["images"],
+        withRelation: ["image"],
       });
       ResponseHandler.success(res, categories);
     } catch (error) {

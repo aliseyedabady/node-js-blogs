@@ -15,7 +15,7 @@ class Category extends Model {
 
   static get relationMappings() {
     return {
-      images: {
+      image: {
         relation: Model.HasOneRelation,
         modelClass: Image,
         join: {
