@@ -9,5 +9,10 @@
   "Name required": "Name is required!",
   "Invalid username or password": "Username or password is wrong!",
   "Title required": "Title is required!",
-  "Title already in use": "Title already in use!"
+  "Title already in use": "Title already in use!",
+  "Slug required": "Slug is required!",
+  "Slug already in use": "Slug already in use!",
+  "Category not found": "Category not found",
+  "Description required": "Description is required!",
+  "Content required": "Content is required!"
 }

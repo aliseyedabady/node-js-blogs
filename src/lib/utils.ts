@@ -1,15 +1,14 @@
-import { Request } from "express";
 import bcrypt from "bcrypt";
+import { NextFunction, Request } from "express";
 import jwt from "jsonwebtoken";
+import { Model } from "objection";
+import { User } from "../models";
 import {
   jwtExpiresIn,
   jwtRefreshExpiresIn,
   jwtSecret,
   saltRounds,
-  translateErrorMessage,
 } from "./constants";
-import { User } from "../models";
-import { Model } from "objection";
 
 export const generateAccessToken = (user: User) => {
   return jwt.sign(
@@ -51,3 +50,25 @@ export const checkUnique = async ({
     }
   }
 };
+
+type TCheckExist = {
+  model: typeof Model;
+  message: string;
+  id: string;
+};
+
+export const checkExist = async ({ model, id, message }: TCheckExist) => {
+  if (id) {
+    const result = await model.query().findById(id);
+    if (result) {
+      return Promise.reject(message);
+    }
+  }
+};
+
+export interface Route {
+  method: "get" | "post" | "put" | "delete" | "patch";
+  path: string;
+  middleware?: Array<(req: Request, res: Response, next: NextFunction) => void>;
+  handler: (req: Request, res: Response) => void;
+}

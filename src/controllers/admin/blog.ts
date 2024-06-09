@@ -1,9 +1,4 @@
 import { Request, Response } from "express";
-import { validationResult } from "express-validator";
-import ResponseHandler from "../../lib/ResponseHandler";
-import { hashPassword } from "../../lib/utils";
-import { User } from "../../models";
-import DBService from "../../lib/DBService";
 
 class BlogController {
   async store(req: Request, res: Response) {}
