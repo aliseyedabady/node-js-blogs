@@ -9,7 +9,6 @@ export async function up(knex: Knex): Promise<void> {
     table.integer("category_id").unsigned().notNullable();
     table.string("description").notNullable();
     table.text("content").notNullable();
-    table.json("seo");
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table.timestamp("updated_at").defaultTo(knex.fn.now());
   });
