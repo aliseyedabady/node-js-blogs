@@ -13,16 +13,18 @@ class Category extends Model {
   created_at!: string;
   updated_at!: string;
 
-  static relationMappings = {
-    image: {
-      relation: Model.BelongsToOneRelation,
-      modelClass: Image,
-      join: {
-        from: "categories.image_id",
-        to: "images.id",
+  static get relationMappings() {
+    return {
+      images: {
+        relation: Model.HasOneRelation,
+        modelClass: Image,
+        join: {
+          from: "categories.id",
+          to: "images.type_id",
+        },
       },
-    },
-  };
+    };
+  }
 }
 
 export default Category;

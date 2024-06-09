@@ -2,17 +2,15 @@ import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import ResponseHandler from "../../lib/ResponseHandler";
 import DBService from "../../lib/DBService";
-import { Category } from "../../models";
+import { Category, Image } from "../../models";
 
 class CategoryController {
   async store(req: Request, res: Response) {
-    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return ResponseHandler.validationError(res, errors);
     }
     try {
-      console.log(req.file);
       const { title } = req.body;
       const category = await DBService.insert({
         model: Category,
@@ -20,7 +18,20 @@ class CategoryController {
           title,
         },
       });
-      ResponseHandler.success(res, category);
+      if (req.file) {
+        await DBService.insert({
+          model: Image,
+          data: {
+            url: req.file.path,
+            type: "category",
+            type_id: category.id,
+          },
+        });
+      }
+      ResponseHandler.success(
+        res,
+        req.file ? { ...category, image: req.file.path } : category
+      );
     } catch (error) {
       console.log(error);
       ResponseHandler.error(res, error);
@@ -32,6 +43,7 @@ class CategoryController {
         model: Category,
         req,
         filters: ["title"],
+        withRelation: ["images"],
       });
       ResponseHandler.success(res, categories);
     } catch (error) {

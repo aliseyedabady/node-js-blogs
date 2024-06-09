@@ -20,11 +20,13 @@ class DBService {
     select,
     filters,
     req,
+    withRelation,
   }: {
     model: typeof Model;
     select?: string[];
     filters?: string[];
     req: Request;
+    withRelation?: string[];
   }) {
     const query = model.query();
     if (select && select.length > 0) {
@@ -36,6 +38,9 @@ class DBService {
           query.where(key, "like", `${req.query[key]}`);
         }
       });
+    }
+    if (withRelation && withRelation.length > 0) {
+      query.withGraphFetched(withRelation);
     }
     return query;
   }
