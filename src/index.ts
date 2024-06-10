@@ -30,11 +30,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/test", upload.single("image"), (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});
-
 knex.queryBuilder();
 
 app.use(api);

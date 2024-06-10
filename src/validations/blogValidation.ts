@@ -19,6 +19,7 @@ export const blogValidation = [
     }),
   body("category_id")
     .isString()
+    .withMessage((_, { req }) => req.__("Category is required"))
     .custom(async (id, { req }) => {
       await checkExist({
         id,

@@ -8,11 +8,13 @@ import {
 } from "../validations";
 import {
   AuthController,
+  BlogController,
   CategoryController,
   UserController,
 } from "../controllers/admin";
 import * as dotenv from "dotenv";
 import upload from "../lib/upload";
+import { blogValidation } from "../validations/blogValidation";
 
 dotenv.config();
 
@@ -40,5 +42,16 @@ api.get("/admin/categories", CategoryController.get);
 api.get("/admin/categories/:id", CategoryController.find);
 api.put("/admin/categories/:id", CategoryController.update);
 api.delete("/admin/categories/:id", CategoryController.remove);
+
+api.post(
+  "/admin/blogs",
+  upload.single("image"),
+  blogValidation,
+  BlogController.store
+);
+api.get("/admin/blogs", BlogController.get);
+api.get("/admin/blogs/:id", BlogController.find);
+api.put("/admin/blogs/:id", BlogController.update);
+api.delete("/admin/blogs/:id", BlogController.remove);
 
 export { api };

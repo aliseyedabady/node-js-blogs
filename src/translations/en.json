@@ -12,6 +12,7 @@
   "Title already in use": "Title already in use!",
   "Slug required": "Slug is required!",
   "Slug already in use": "Slug already in use!",
+  "Category required": "Category is required!",
   "Category not found": "Category not found",
   "Description required": "Description is required!",
   "Content required": "Content is required!"

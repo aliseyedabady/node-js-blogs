@@ -60,7 +60,7 @@ type TCheckExist = {
 export const checkExist = async ({ model, id, message }: TCheckExist) => {
   if (id) {
     const result = await model.query().findById(id);
-    if (result) {
+    if (!result) {
       return Promise.reject(message);
     }
   }

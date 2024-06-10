@@ -40,7 +40,7 @@ class DBService {
       });
     }
     if (withRelation && withRelation.length > 0) {
-      query.withGraphFetched(withRelation);
+      query.withGraphFetched(`[${withRelation.join(", ")}]`);
     }
     return query;
   }
