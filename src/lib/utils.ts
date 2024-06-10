@@ -3,12 +3,15 @@ import { NextFunction, Request } from "express";
 import jwt from "jsonwebtoken";
 import { Model } from "objection";
 import { User } from "../models";
+import * as fs from "fs";
 import {
   jwtExpiresIn,
   jwtRefreshExpiresIn,
   jwtSecret,
   saltRounds,
 } from "./constants";
+import { promisify } from "util";
+import path from "path";
 
 export const generateAccessToken = (user: User) => {
   return jwt.sign(
@@ -72,3 +75,18 @@ export interface Route {
   middleware?: Array<(req: Request, res: Response, next: NextFunction) => void>;
   handler: (req: Request, res: Response) => void;
 }
+export const deleteFile = (filePath: string) => {
+  const unlinkAsync = promisify(fs.unlink);
+  unlinkAsync(path.join(__dirname + `../../uploads/1717951296270.png`))
+    .then(() => {
+      console.log("File deleted successfully");
+    })
+    .catch((err: NodeJS.ErrnoException) => {
+      console.error(`Error deleting file: ${err.message}`);
+    });
+};
+
+export const getFileName = (filePath: string): string => {
+  const parts = filePath.split("/");
+  return parts[parts.length - 1];
+};

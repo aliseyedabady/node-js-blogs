@@ -1,7 +1,6 @@
 import { Model } from "objection";
 import Image from "./Image";
 import Category from "./Category";
-
 class Blog extends Model {
   static get tableName() {
     return "blogs";

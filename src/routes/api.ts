@@ -51,7 +51,7 @@ api.post(
 );
 api.get("/admin/blogs", BlogController.get);
 api.get("/admin/blogs/:id", BlogController.find);
-api.put("/admin/blogs/:id", BlogController.update);
+api.put("/admin/blogs/:id", upload.single("image"), BlogController.update);
 api.delete("/admin/blogs/:id", BlogController.remove);
 
 export { api };

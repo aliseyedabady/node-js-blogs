@@ -44,8 +44,20 @@ class DBService {
     }
     return query;
   }
-  async getById({ model, id }: { model: typeof Model; id: string }) {
-    return model.query().findById(id);
+  async getById({
+    model,
+    id,
+    withRelation,
+  }: {
+    model: typeof Model;
+    id: string;
+    withRelation?: string[];
+  }) {
+    const query = model.query();
+    if (withRelation && withRelation.length > 0) {
+      query.withGraphFetched(`[${withRelation.join(", ")}]`);
+    }
+    return query.findById(id);
   }
   async update({
     model,

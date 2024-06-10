@@ -53,12 +53,12 @@ class CategoryController {
   }
   async find(req: Request, res: Response) {
     try {
-      const user = await DBService.getById({
+      const category = await DBService.getById({
         model: Category,
         id: req.params.id,
       });
-      if (user) {
-        ResponseHandler.success(res, user);
+      if (category) {
+        ResponseHandler.success(res, category);
       } else {
         ResponseHandler.notFound(res);
       }
@@ -86,11 +86,11 @@ class CategoryController {
   }
   async remove(req: Request, res: Response) {
     try {
-      const user = await DBService.delete({
+      const category = await DBService.delete({
         id: req.params.id,
         model: Category,
       });
-      if (user) {
+      if (category) {
         ResponseHandler.success(res);
       } else {
         ResponseHandler.notFound(res);
