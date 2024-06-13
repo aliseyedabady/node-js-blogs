@@ -13,6 +13,13 @@ export async function up(knex: Knex): Promise<void> {
       .references("id")
       .inTable("comments")
       .onDelete("CASCADE");
+    table
+      .integer("blog_id")
+      .unsigned()
+      .nullable()
+      .references("id")
+      .inTable("blogs")
+      .onDelete("CASCADE");
     table.enum("status", ["active", "inactive"]).notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table.timestamp("updated_at").defaultTo(knex.fn.now());

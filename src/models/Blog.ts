@@ -1,6 +1,7 @@
 import { Model } from "objection";
 import Image from "./Image";
 import Category from "./Category";
+import Comment from "./Comment";
 class Blog extends Model {
   static get tableName() {
     return "blogs";
@@ -36,6 +37,14 @@ class Blog extends Model {
           extra: {
             type: "blog",
           },
+        },
+      },
+      blog: {
+        relation: Model.HasManyRelation,
+        modelClass: Comment,
+        join: {
+          from: "blogs.id",
+          to: "comments.blog_id",
         },
       },
     };

@@ -1,6 +1,7 @@
 import { body } from "express-validator";
 import { checkExist } from "../lib/utils";
 import Comment from "../models/Comment";
+import { Blog } from "../models";
 
 export const commentValidation = [
   body("name")
@@ -19,4 +20,14 @@ export const commentValidation = [
       message: req.__("Comment not found"),
     });
   }),
+  body("blog_id")
+    .isString()
+    .withMessage((_, { req }) => req.__(""))
+    .custom(async (id, { req }) => {
+      await checkExist({
+        id,
+        model: Blog,
+        message: req.__("Blog not found"),
+      });
+    }),
 ];

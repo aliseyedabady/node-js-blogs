@@ -12,6 +12,7 @@ class Comment extends Model {
   email!: string;
   text!: string;
   parent_id!: string;
+  blog_id!: string;
   status!: "active" | "inactive";
   created_at!: string;
   updated_at!: string;
