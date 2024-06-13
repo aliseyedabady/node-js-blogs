@@ -26,16 +26,21 @@ if (process.env.MODE === "development") {
   api.use("/admin/signup", adminSignupValidation, AuthController.signUp);
 }
 
-api.use("/comment/store", commentValidation, UserCommentController.store);
+api.use(
+  "/comment",
+  upload.none(),
+  commentValidation,
+  UserCommentController.store
+);
 
 api.use("/admin", AdminMiddleware);
 api.use("/admin/refresh", AuthController.refresh);
 
-api.post("/admin/users", userValidation, UserController.store);
-api.get("/admin/users", UserController.get);
-api.get("/admin/users/:id", UserController.find);
-api.put("/admin/users/:id", UserController.update);
-api.delete("/admin/users/:id", UserController.remove);
+api.post("/admin/users", upload.none(), userValidation, UserController.store);
+api.get("/admin/users", upload.none(), UserController.get);
+api.get("/admin/users/:id", upload.none(), UserController.find);
+api.put("/admin/users/:id", upload.none(), UserController.update);
+api.delete("/admin/users/:id", upload.none(), UserController.remove);
 
 api.post(
   "/admin/categories",
@@ -43,10 +48,10 @@ api.post(
   categoryValidation,
   CategoryController.store
 );
-api.get("/admin/categories", CategoryController.get);
-api.get("/admin/categories/:id", CategoryController.find);
-api.put("/admin/categories/:id", CategoryController.update);
-api.delete("/admin/categories/:id", CategoryController.remove);
+api.get("/admin/categories", upload.none(), CategoryController.get);
+api.get("/admin/categories/:id", upload.none(), CategoryController.find);
+api.put("/admin/categories/:id", upload.none(), CategoryController.update);
+api.delete("/admin/categories/:id", upload.none(), CategoryController.remove);
 
 api.post(
   "/admin/blogs",
@@ -54,9 +59,9 @@ api.post(
   blogValidation,
   BlogController.store
 );
-api.get("/admin/blogs", BlogController.get);
-api.get("/admin/blogs/:id", BlogController.find);
+api.get("/admin/blogs", upload.none(), BlogController.get);
+api.get("/admin/blogs/:id", upload.none(), BlogController.find);
 api.put("/admin/blogs/:id", upload.single("image"), BlogController.update);
-api.delete("/admin/blogs/:id", BlogController.remove);
+api.delete("/admin/blogs/:id", upload.none(), BlogController.remove);
 
 export { api };
