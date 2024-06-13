@@ -15,5 +15,6 @@
   "Category required": "دسته بندی الزامی است!",
   "Category not found": "دسته بندی یافت نشد",
   "Description required": "توضیحات اجباری است!",
-  "Content required": "متن اجباری است!"
+  "Content required": "متن اجباری است!",
+  "Comment not found": "نظر یافت نشد!"
 }

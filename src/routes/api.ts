@@ -4,6 +4,7 @@ import {
   adminLoginValidation,
   adminSignupValidation,
   categoryValidation,
+  commentValidation,
   userValidation,
 } from "../validations";
 import {
@@ -15,6 +16,7 @@ import {
 import * as dotenv from "dotenv";
 import upload from "../lib/upload";
 import { blogValidation } from "../validations/blogValidation";
+import { UserCommentController } from "../controllers/user";
 
 dotenv.config();
 
@@ -23,6 +25,9 @@ api.use("/admin/login", adminLoginValidation, AuthController.login);
 if (process.env.MODE === "development") {
   api.use("/admin/signup", adminSignupValidation, AuthController.signUp);
 }
+
+api.use("/comment/store", commentValidation, UserCommentController.store);
+
 api.use("/admin", AdminMiddleware);
 api.use("/admin/refresh", AuthController.refresh);
 

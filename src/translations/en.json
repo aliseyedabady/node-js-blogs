@@ -15,5 +15,6 @@
   "Category required": "Category is required!",
   "Category not found": "Category not found",
   "Description required": "Description is required!",
-  "Content required": "Content is required!"
+  "Content required": "Content is required!",
+  "Comment not found": "Comment not found!"
 }

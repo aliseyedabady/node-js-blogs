@@ -1,3 +1,4 @@
+import { commentValidation } from "./commentValidation";
 import { categoryValidation } from "./categoryValidation";
 import { adminLoginValidation } from "./adminLoginValidation";
 import { userValidation } from "./userValidation";
@@ -8,4 +9,5 @@ export {
   adminLoginValidation,
   adminSignupValidation,
   categoryValidation,
+  commentValidation,
 };
