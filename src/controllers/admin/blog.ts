@@ -51,7 +51,7 @@ class BlogController {
       const blog = await DBService.getById({
         model: Blog,
         id: req.params.id,
-        withRelation: ["category", "image"],
+        withRelation: ["category", "image", "comments.[replies]"],
       });
       if (blog) {
         ResponseHandler.success(res, blog);

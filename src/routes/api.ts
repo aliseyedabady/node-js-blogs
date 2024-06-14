@@ -8,6 +8,7 @@ import {
   userValidation,
 } from "../validations";
 import {
+  AdminCommentController,
   AuthController,
   BlogController,
   CategoryController,
@@ -59,9 +60,14 @@ api.post(
   blogValidation,
   BlogController.store
 );
-api.get("/admin/blogs", upload.none(), BlogController.get);
+api.get("/admin/blogs", BlogController.get);
 api.get("/admin/blogs/:id", upload.none(), BlogController.find);
 api.put("/admin/blogs/:id", upload.single("image"), BlogController.update);
 api.delete("/admin/blogs/:id", upload.none(), BlogController.remove);
+
+api.get("/admin/comments", AdminCommentController.get);
+api.get("/admin/comments/:id", upload.none(), AdminCommentController.find);
+api.put("/admin/comments/:id", AdminCommentController.update);
+api.delete("/admin/comments/:id", upload.none(), AdminCommentController.remove);
 
 export { api };

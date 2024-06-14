@@ -39,7 +39,7 @@ class Blog extends Model {
           },
         },
       },
-      blog: {
+      comments: {
         relation: Model.HasManyRelation,
         modelClass: Comment,
         join: {

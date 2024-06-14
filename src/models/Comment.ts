@@ -1,4 +1,5 @@
 import { Model } from "objection";
+import Blog from "./Blog";
 
 class Comment extends Model {
   static get tableName() {
@@ -25,6 +26,14 @@ class Comment extends Model {
         join: {
           from: "comments.id",
           to: "comments.parent_id",
+        },
+      },
+      blog: {
+        relation: Model.HasOneRelation,
+        modelClass: Blog,
+        join: {
+          from: "comments.blog_id",
+          to: "blogs.id",
         },
       },
     };
