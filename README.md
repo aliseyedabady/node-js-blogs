@@ -33,9 +33,11 @@ Prerequisites
 ## Installation
 
 1. Clone the repository:
-   <code class="!whitespace-pre hljs language-bash">git <span class="hljs-built_in">clone</span> https://github.com/aliseyedabady/node-js-blogs.git
-   <span class="hljs-built_in">cd</span> blog-app
-   </code>
+
+```sh
+git clone https://github.com/aliseyedabady/node-js-blogs.git
+
+```
 
 ```sh
 npm start
