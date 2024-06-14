@@ -39,6 +39,49 @@ git clone https://github.com/aliseyedabady/node-js-blogs.git
 
 ```
 
+2. Install dependencies:
+
 ```sh
-npm start
+npm install
+# or
+yarn install
+
 ```
+
+3. Set up the database:
+
+- Create a MySQL database.
+- Update the .env file with your database credentials.
+
+4. Run migrations and seeds:
+
+```sh
+npx knex migrate:latest
+npx knex seed:run
+```
+
+5. Start the application:
+
+```sh
+npm run dev
+# or
+yarn dev
+```
+
+## Environment Variables
+
+Create a .env file in the root directory and configure the following variables:
+
+```sh
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=
+DB_NAME=blogs
+PORT=8000
+JWT_SECRET=JWT_SECRET
+MODE=development
+```
+
+## License
+
+This project is licensed under the MIT License.
